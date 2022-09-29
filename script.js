@@ -19,11 +19,14 @@ const endScreen = document.getElementById('endScreen')
 const restartButton = document.getElementById('restartButton')
 let circleTurn
 
+startGame()
+
 restartButton.addEventListener('click', startGame)
 
 function startGame() {
   circleTurn = false
   cellElement.forEach(cell => {
+    // loops through all the cells and removes X or O's
     cell.classList.remove(X_CLASS)
     cell.classList.remove(CIRCLE_CLASS)
     cell.addEventListener('click', handleClick, { once: true })
@@ -56,6 +59,7 @@ function endGame(draw) {
 }
 
 function isDraw() {
+  //restructure cellElement into an array so i can use '.every' method.
   return [...cellElement].every(cell =>{
     return cell.classList.contains(X_CLASS) ||
     cell.classList.contains(CIRCLE_CLASS)
@@ -71,6 +75,7 @@ function swapTurn() {
 }
 
 function setBoardHoverClass() {
+  // checks who's turn it is and adds the hover effect
   board.classList.remove(X_CLASS)
   board.classList.remove(CIRCLE_CLASS)
   if (circleTurn) {
@@ -81,13 +86,11 @@ function setBoardHoverClass() {
 }
 
 function checkWin(currentClass) {
+  // loops through all the combinations and checks if the board matches
+  // one of the winning combinations.
   return winCombinations.some(combination =>{
     return combination.every(index =>{
       return cellElement[index].classList.contains(currentClass)
     })
   })
 }
-
-
-
-startGame()

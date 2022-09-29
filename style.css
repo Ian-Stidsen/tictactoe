@@ -145,5 +145,6 @@ body {
 }
 
 .endScreen.show {
+  /* displays the end screen*/
   display: flex;
 }
